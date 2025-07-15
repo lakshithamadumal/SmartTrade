@@ -11,6 +11,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import jdk.javadoc.internal.tool.Main;
+import model.Mail;
 import model.Util;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -21,14 +23,14 @@ import org.hibernate.SessionFactory;
  */
 @WebServlet(name = "SignUp", urlPatterns = {"/SignUp"})
 public class SignUp extends HttpServlet {
-
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
         Gson gson = new Gson();
         JsonObject user = gson.fromJson(request.getReader(), JsonObject.class);
-
+        
         String firstName = user.get("firstName").getAsString();
         String lastName = user.get("lastName").getAsString();
         String email = user.get("email").getAsString();
@@ -43,11 +45,23 @@ public class SignUp extends HttpServlet {
         u.setLast_name(lastName);
         u.setEmail(email);
         u.setPassword(password);
-        u.setVerification(Util.generateCode());
+        
         u.setCreated_at(new Date());
+
+        //Verification
+        String verificationCode = Util.generateCode();
+        u.setVerification(verificationCode);
         
         s.save(u);
         s.beginTransaction().commit();
 
+        //send email
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Mail.sendMail(email, "Smart trade Verification code", "h1"+verificationCode+"h1");
+            }
+        }).start();
+        
     }
 }
