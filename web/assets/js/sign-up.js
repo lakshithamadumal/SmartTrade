@@ -23,4 +23,18 @@ async function SignUp() {
             }
         }
     );
+
+    if (response.ok) { //Success
+        const json = await response.json();
+        if (json.status) {
+            document.getElementById("message").className = "text-success";
+            document.getElementById("message").innerHTML = json.message;
+            window.location = "verify-account.html";
+        } else {
+            document.getElementById("message").innerHTML = json.message;
+        }
+    } else {
+        document.getElementById("message").innerHTML = ("Sign Up Failed. Try again Later.");
+
+    }
 }

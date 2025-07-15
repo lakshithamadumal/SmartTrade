@@ -14,8 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import jdk.javadoc.internal.tool.Main;
 import model.Mail;
 import model.Util;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -36,58 +38,93 @@ public class SignUp extends HttpServlet {
         String email = user.get("email").getAsString();
         String password = user.get("password").getAsString();
 
-        //Data Save
-        SessionFactory sf = HibernateUtil.getSessionFactory();
-        Session s = sf.openSession();
+        //Validation
+        JsonObject responseObject = new JsonObject();
+        responseObject.addProperty("status", Boolean.FALSE);
 
-        User u = new User();
-        u.setFirst_name(firstName);
-        u.setLast_name(lastName);
-        u.setEmail(email);
-        u.setPassword(password);
+        if (firstName.isEmpty()) {
+            responseObject.addProperty("message", "First Name can not be Empty!");
+        } else if (lastName.isEmpty()) {
+            responseObject.addProperty("message", "Last Name can not be Empty!");
+        } else if (email.isEmpty()) {
+            responseObject.addProperty("message", "Email can not be Empty!");
+        } else if (!Util.isEmailValid(email)) {
+            responseObject.addProperty("message", "Please Enter a Valid Email!");
+        } else if (password.isEmpty()) {
+            responseObject.addProperty("message", "Password can not be Empty!");
+        } else if (!Util.isPasswordValid(password)) {
+            responseObject.addProperty("message", "Password must contain at least 8 characters, including uppercase, lowercase, a number, and a special character.");
+        } else {
 
-        u.setCreated_at(new Date());
+            //Data Save
+            SessionFactory sf = HibernateUtil.getSessionFactory();
+            Session s = sf.openSession();
 
-        //Verification
-        String verificationCode = Util.generateCode();
-        u.setVerification(verificationCode);
+            Criteria criteria = s.createCriteria(User.class);
+            criteria.add(Restrictions.eq("email", email));
 
-        s.save(u);
-        s.beginTransaction().commit();
+            if (!criteria.list().isEmpty()) {
+                responseObject.addProperty("message", "User with this email already exit!");
+            } else {
 
-        //send email
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String emailBody = "<div style='"
-                        + "font-family: Arial, sans-serif; "
-                        + "background-color: #f4f4f4; "
-                        + "padding: 30px; "
-                        + "text-align: center;'>"
-                        + "<div style='"
-                        + "background-color: #ffffff; "
-                        + "max-width: 600px; "
-                        + "margin: auto; "
-                        + "padding: 40px; "
-                        + "border-radius: 8px; "
-                        + "box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);'>"
-                        + "<h2 style='color: #333;'>SmartTrade Verification</h2>"
-                        + "<p style='font-size: 16px; color: #555;'>Use the code below to verify your email address:</p>"
-                        + "<div style='"
-                        + "font-size: 28px; "
-                        + "font-weight: bold; "
-                        + "color: #007bff; "
-                        + "margin-top: 20px;'>"
-                        + verificationCode + "</div>"
-                        + "<p style='margin-top: 30px; font-size: 14px; color: #888;'>"
-                        + "If you didn’t request this, please ignore this email."
-                        + "</p>"
-                        + "</div>"
-                        + "</div>";
+                User u = new User();
+                u.setFirst_name(firstName);
+                u.setLast_name(lastName);
+                u.setEmail(email);
+                u.setPassword(password);
 
-                Mail.sendMail(email, "SmartTrade Verification Code", emailBody);
+                u.setCreated_at(new Date());
+
+                //Verification
+                String verificationCode = Util.generateCode();
+                u.setVerification(verificationCode);
+
+                s.save(u);
+                s.beginTransaction().commit();
+
+                //send email
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        String emailBody = "<div style='"
+                                + "font-family: Arial, sans-serif; "
+                                + "background-color: #f4f4f4; "
+                                + "padding: 30px; "
+                                + "text-align: center;'>"
+                                + "<div style='"
+                                + "background-color: #ffffff; "
+                                + "max-width: 600px; "
+                                + "margin: auto; "
+                                + "padding: 40px; "
+                                + "border-radius: 8px; "
+                                + "box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);'>"
+                                + "<h2 style='color: #333;'>SmartTrade Verification</h2>"
+                                + "<p style='font-size: 16px; color: #555;'>Use the code below to verify your email address:</p>"
+                                + "<div style='"
+                                + "font-size: 28px; "
+                                + "font-weight: bold; "
+                                + "color: #007bff; "
+                                + "margin-top: 20px;'>"
+                                + verificationCode + "</div>"
+                                + "<p style='margin-top: 30px; font-size: 14px; color: #888;'>"
+                                + "If you didn’t request this, please ignore this email."
+                                + "</p>"
+                                + "</div>"
+                                + "</div>";
+
+                        Mail.sendMail(email, "SmartTrade Verification Code", emailBody);
+                    }
+                }).start();
+
+                responseObject.addProperty("status", Boolean.TRUE);
+                responseObject.addProperty("message", "Registration successful. Please check your email for Verification");
             }
-        }).start();
+            s.close();
+        }
+
+        String responseText = gson.toJson(responseObject);
+        response.setContentType("application/json");
+        response.getWriter().write(responseText);
 
     }
 }
