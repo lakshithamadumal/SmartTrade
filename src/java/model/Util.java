@@ -15,7 +15,7 @@ public class Util {
         return email.matches("^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$");
     }
 
-    public static boolean isPasswordValid(String email) {
-        return email.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=]).{8,}$");
+    public static boolean isPasswordValid(String password) {
+        return password.matches("^.{1,7}$");
     }
 }
