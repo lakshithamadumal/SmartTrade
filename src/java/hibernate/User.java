@@ -1,5 +1,6 @@
 package hibernate;
 
+import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
@@ -22,7 +23,7 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
-    @Column(name = "last_name", length = 45, nullable = false)
+    @Column(name = "first_name", length = 45, nullable = false)
     String first_name;
 
     @Column(name = "last_name", length = 45, nullable = false)
