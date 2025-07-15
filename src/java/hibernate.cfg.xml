@@ -8,5 +8,6 @@
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">#Lucky2003sql</property>
         <property name="hibernate.show_sql">true</property>
+        <mapping class="hibernate.User"/>
     </session-factory>
 </hibernate-configuration>

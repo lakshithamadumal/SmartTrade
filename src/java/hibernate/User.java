@@ -2,19 +2,42 @@ package hibernate;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author Laky
  */
+@Entity
+@Table(name = "user")
 public class User implements Serializable {
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
+
+    @Column(name = "last_name", length = 45, nullable = false)
     String first_name;
+
+    @Column(name = "last_name", length = 45, nullable = false)
     String last_name;
+
+    @Column(name = "email", length = 45, nullable = false)
     String email;
+
+    @Column(name = "password", length = 20, nullable = false)
     String password;
+
+    @Column(name = "verification", length = 10, nullable = false)
     String verification;
+
+    @Column(name = "created_at", nullable = false)
     Date created_at;
 
     public User() {
