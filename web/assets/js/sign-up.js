@@ -1,11 +1,26 @@
-function SignUp(){
+async function SignUp() {
     const firstName = document.getElementById("firstName").value;
     const lastName = document.getElementById("lastName").value;
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
-    console.log(firstName);
-    console.log(lastName);
-    console.log(email);
-    console.log(password);
+    const user = {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password
+    };
+
+    const userJson = JSON.stringify(user);
+
+    const response = await fetch(
+        "SignUp",
+        {
+            method: "POST",
+            body: userJson,
+            headers: {
+                "Content-type": "application/json"
+            }
+        }
+    );
 }
