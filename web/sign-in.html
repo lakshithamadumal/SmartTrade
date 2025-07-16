@@ -41,7 +41,7 @@
                 <div class="col-sm-8">
                     <div class="singin-header-btn">
                         <p>Not a member?</p>
-                        <a href="#" class="axil-btn btn-bg-secondary sign-up-btn">Sign Up Now</a>
+                        <a href="sign-up.html" class="axil-btn btn-bg-secondary sign-up-btn">Sign Up Now</a>
                     </div>
                 </div>
             </div>
@@ -61,20 +61,20 @@
                         
                         <p class="b2 mb--10">Sign in to Smart Trade to access your account and manage your trades securely.</p>
                         
-                        <p class="text-danger"></p>
+                        <p class="text-danger" id="message"></p>
                         
                         <form class="singin-form">
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="email" class="form-control" value="">
+                                <input type="email" id="email" class="form-control" value="">
                             </div>
                             <div class="form-group">
                                 <label>Password</label>
-                                <input type="password" class="form-control" value="">
+                                <input type="password" id="password" class="form-control" value="">
                             </div>
                             <div class="form-group d-flex align-items-center justify-content-between">
-                                <button type="button" class="axil-btn btn-bg-primary submit-btn">Sign In</button>
-                                <a href="#" class="forgot-btn">Verify Your Account</a>
+                                <button type="button" onclick="SignIn();" class="axil-btn btn-bg-primary submit-btn">Sign In</button>
+                                
                             </div>
                         </form>
                     </div>
@@ -106,6 +106,7 @@
 
     <!-- Main JS -->
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/sign-in.js"></script>
     
 </body>
 
