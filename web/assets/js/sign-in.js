@@ -20,4 +20,20 @@ async function SignIn() {
             }
         }
     );
+
+    if (response.ok) { //Success
+        const json = await response.json();
+        if (json.status) {
+            if (json.message === "1") {
+                window.location = "verify-account.html";
+            } else {
+                window.location = "index.html";
+            }
+        } else {
+            document.getElementById("message").innerHTML = json.message;
+        }
+    } else {
+        document.getElementById("message").innerHTML = ("Sign In Failed. Try again Later.");
+
+    }
 }
