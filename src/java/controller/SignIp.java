@@ -59,7 +59,7 @@ public class SignIp extends HttpServlet {
             c.add(crt2);
 
             if (c.list().isEmpty()) {
-                responseObject.addProperty("message", "Inalid User");
+                responseObject.addProperty("message", "Invalid User");
             } else {
 
                 User u = (User) c.list().get(0);
