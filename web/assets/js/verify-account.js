@@ -24,7 +24,11 @@ async function VerifyAccount() {
         if (json.status) {
             window.location = "index.html";
         } else {
-            document.getElementById("message").innerHTML = json.message;
+            if (json.message === "Email not Found") {
+                window.location = "sign-in.html";
+            } else {
+                document.getElementById("message").innerHTML = json.message;
+            }
         }
 
     } else {
