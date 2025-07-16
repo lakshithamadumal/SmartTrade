@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import jdk.javadoc.internal.tool.Main;
 import model.Mail;
 import model.Util;
@@ -115,6 +116,11 @@ public class SignUp extends HttpServlet {
                         Mail.sendMail(email, "SmartTrade Verification Code", emailBody);
                     }
                 }).start();
+
+                //Session Managemnrt
+                HttpSession ses = request.getSession();
+                ses.setAttribute("email", email);
+                //Session Managemnrt
 
                 responseObject.addProperty("status", Boolean.TRUE);
                 responseObject.addProperty("message", "Registration successful. Please check your email for Verification");

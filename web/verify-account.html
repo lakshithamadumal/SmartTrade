@@ -64,15 +64,15 @@
                         
                         <p class="b2 mb--10">Please verify your email to secure your account and unlock all features. Click the button below to complete the process.</p>
                         
-                        <p class="text-danger"></p>
+                        <p class="text-danger" id="message"></p>
                         
                         <form class="singin-form">
                             <div class="form-group">
                                 <label>Verification Code</label>
-                                <input type="text" class="form-control" value="">
+                                <input type="text" id="verifyCode" class="form-control" value="">
                             </div>
                             <div class="form-group">
-                                <button type="button" class="axil-btn btn-bg-primary submit-btn">Verify & Continue</button>
+                                <button type="button" onclick="VerifyAccount();" class="axil-btn btn-bg-primary submit-btn">Verify & Continue</button>
                             </div>
                         </form>
                     </div>
@@ -104,6 +104,7 @@
 
     <!-- Main JS -->
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/verify-account.js"></script>
     
 </body>
 
