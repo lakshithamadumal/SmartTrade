@@ -211,8 +211,8 @@
                                     <img src="./assets/images/avatar.png" alt="Profile">
                                 </div>
                                 <div class="media-body">
-                                    <h5 class="title mb-0">Hello Name</h5>
-                                    <span class="joining-date">Smart Trade Member Since Sep 2024</span>
+                                    <h5 class="title mb-0" id="username"></h5>
+                                    <span class="joining-date" id="since"></span>
                                 </div>
                             </div>
                         </div>
@@ -419,13 +419,13 @@
                                                         <div class="col-lg-6">
                                                             <div class="form-group">
                                                                 <label>First Name</label>
-                                                                <input type="text" class="form-control" value="">
+                                                                <input type="text" id="firstName" class="form-control" value="">
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <div class="form-group">
                                                                 <label>Last Name</label>
-                                                                <input type="text" class="form-control" value="">
+                                                                <input type="text" id="lastName" class="form-control" value="">
                                                             </div>
                                                         </div>
 
@@ -433,15 +433,15 @@
                                                             <h5 class="title">Password Change</h5>
                                                             <div class="form-group">
                                                                 <label>Current Password</label>
-                                                                <input type="password" class="form-control" value="">
+                                                                <input type="password" id="currentPassword" class="form-control" value="">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>New Password</label>
-                                                                <input type="password" class="form-control">
+                                                                <input type="password" id="newPassword" class="form-control">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Confirm New Password</label>
-                                                                <input type="password" class="form-control">
+                                                                <input type="password" id="confirmNewPassword" class="form-control">
                                                             </div>
                                                             <div class="form-group mb--0 d-grid">
                                                                 <input type="submit" class="axil-btn" value="Save Changes">
@@ -730,6 +730,7 @@
         <!-- Main JS -->
         <script src="assets/js/main.js"></script>
         <script src="assets/js/sign-out.js"></script>
+        <script src="assets/js/my-account.js"></script>
 
     </body>
 
