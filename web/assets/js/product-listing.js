@@ -1,3 +1,5 @@
+var modelList;
+
 window.onload = async function () {
     const response = await fetch("LoadProductData");
 
@@ -6,7 +8,8 @@ window.onload = async function () {
         if (json.status) { // if true
 
             loadSelect("brand", json.brandList, "name");
-            loadSelect("model", json.modelList, "name");
+            // loadSelect("model", json.modelList, "name");
+            modelList = json.modelList;
             loadSelect("color", json.colorlList, "name");
             loadSelect("condition", json.qualitylList, "name");
             loadSelect("storage", json.storagelList, "name");
@@ -31,3 +34,20 @@ function loadSelect(selectId, list, property) {
     });
 
 }
+
+function loadModels() {
+    const brandId = document.getElementById("brand").value;
+
+    const modelSelect = document.getElementById("model");
+    modelSelect.length = 1;
+
+    modelList.forEach(item => {
+        if (item.brand.id == brandId) {
+            const option = document.createElement("option");
+            option.value = item.id;
+            option.innerHTML = item.name;
+            modelSelect.appendChild(option);
+        }
+    });
+}
+
