@@ -5,11 +5,11 @@ window.onload = async function () {
         const json = await response.json();
         if (json.status) { // if true
 
-            loadSelect("brand" , json.brandList , "name");
-            loadSelect("model" , json.modelList , "name");
-            loadSelect("color" , json.colorlList , "name");
-            loadSelect("condition" , json.qualitylList , "name");
-            loadSelect("storage" , json.storagelList , "name");
+            loadSelect("brand", json.brandList, "name");
+            loadSelect("model", json.modelList, "name");
+            loadSelect("color", json.colorlList, "name");
+            loadSelect("condition", json.qualitylList, "name");
+            loadSelect("storage", json.storagelList, "name");
 
         } else { // when status false
             document.getElementById("message").innerHTML = "Unable to get product data!";
