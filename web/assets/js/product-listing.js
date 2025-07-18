@@ -51,3 +51,39 @@ function loadModels() {
     });
 }
 
+async function saveProduct() {
+    const brandId = document.getElementById("brand").value;
+    const modelId = document.getElementById("model").value;
+    const title = document.getElementById("title").value;
+    const description = document.getElementById("description").value;
+    const storageId = document.getElementById("storage").value;
+    const colorId = document.getElementById("color").value;
+    const conditionId = document.getElementById("condition").value;
+    const price = document.getElementById("price").value;
+    const qty = document.getElementById("qty").value;
+    const image1 = document.getElementById("img1").files[0];
+    const image2 = document.getElementById("img2").files[0];
+    const image3 = document.getElementById("img3").files[0];
+
+    const form = new FormData();
+    form.append("brandId", brandId);
+    form.append("modelId", modelId);
+    form.append("title", title);
+    form.append("description", description);
+    form.append("storageId", storageId);
+    form.append("colorId", colorId);
+    form.append("conditionId", conditionId);
+    form.append("price", price);
+    form.append("qty", qty);
+    form.append("image1", image1);
+    form.append("image2", image2);
+    form.append("image3", image3);
+
+    const response = await fetch("SaveProduct", {
+        method: "POST",
+        body: form,
+    });
+
+    const result = await response.text();
+    console.log("Server Response:", result);
+}

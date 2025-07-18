@@ -360,7 +360,7 @@
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label>Title</label>
-                                                            <input type="text"
+                                                            <input type="text" id="title"
                                                                 class="form-control"
                                                                 value>
                                                         </div>
@@ -368,7 +368,7 @@
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label>Description</label>
-                                                            <textarea cols="1"
+                                                            <textarea cols="1" id="description"
                                                                 rows="2"></textarea>
                                                         </div>
                                                     </div>
@@ -403,7 +403,7 @@
                                                         <div class="form-group">
                                                             <label>Price</label>
                                                             <input
-                                                                type="text"
+                                                                type="text" id="price"
                                                                 class="form-control"
                                                                 pattern="^\d+(\.\d{2})?$"
                                                                 placeholder="0.00">
@@ -413,7 +413,7 @@
                                                         <div class="form-group">
                                                             <label>Quantity</label>
                                                             <input
-                                                                type="number"
+                                                                type="number" id="qty"
                                                                 class="form-control"
                                                                 min="1"
                                                                 value="1">
@@ -421,21 +421,21 @@
                                                     </div>
                                                     <div class="col-lg-4">
                                                         <label>Image 1</label>
-                                                        <input
+                                                        <input id="img1"
                                                             class="form-control b2"
                                                             type="file"
                                                             accept="image/*">
                                                     </div>
                                                     <div class="col-lg-4">
                                                         <label>Image 2</label>
-                                                        <input
+                                                        <input id="img2"
                                                             class="form-control b2"
                                                             type="file"
                                                             accept="image/*">
                                                     </div>
                                                     <div class="col-lg-4">
                                                         <label>Image 3</label>
-                                                        <input
+                                                        <input id="img3"
                                                             class="form-control b2"
                                                             type="file"
                                                             accept="image/*">
@@ -443,7 +443,7 @@
                                                     <div class="col-12">
                                                         <div
                                                             class="form-group mb--0 mt--30 d-grid">
-                                                            <input type="button"
+                                                            <input type="button" onclick="saveProduct();"
                                                                 class="axil-btn"
                                                                 value="Add Product To Listing">
                                                         </div>
