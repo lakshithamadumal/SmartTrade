@@ -31,6 +31,9 @@ public class LoadProductData extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        JsonObject responseObject = new JsonObject();
+        responseObject.addProperty("status", Boolean.FALSE);
+
         SessionFactory sf = HibernateUtil.getSessionFactory();
         Session s = sf.openSession();
 
@@ -57,14 +60,14 @@ public class LoadProductData extends HttpServlet {
         s.close();
 
         Gson gson = new Gson();
-        JsonObject responseObject = new JsonObject();
-        responseObject.addProperty("status", Boolean.TRUE);
 
         responseObject.add("brandList", gson.toJsonTree(brandList));
         responseObject.add("modelList", gson.toJsonTree(modelList));
         responseObject.add("colorlList", gson.toJsonTree(colorlList));
         responseObject.add("qualitylList", gson.toJsonTree(qualitylList));
         responseObject.add("storagelList", gson.toJsonTree(storagelList));
+
+        responseObject.addProperty("status", Boolean.TRUE);
 
         response.setContentType("application/json");
         response.getWriter().write(gson.toJson(responseObject));
