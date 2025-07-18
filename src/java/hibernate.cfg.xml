@@ -14,5 +14,6 @@
         <mapping class="hibernate.Color"/>
         <mapping class="hibernate.Quality"/>
         <mapping class="hibernate.Storage"/>
+        <mapping class="hibernate.Status"/>
     </session-factory>
 </hibernate-configuration>
