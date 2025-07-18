@@ -9,5 +9,10 @@
         <property name="hibernate.connection.password">#Lucky2003sql</property>
         <property name="hibernate.show_sql">true</property>
         <mapping class="hibernate.User"/>
+        <mapping class="hibernate.Brand"/>
+        <mapping class="hibernate.Model"/>
+        <mapping class="hibernate.Color"/>
+        <mapping class="hibernate.Quality"/>
+        <mapping class="hibernate.Storage"/>
     </session-factory>
 </hibernate-configuration>
