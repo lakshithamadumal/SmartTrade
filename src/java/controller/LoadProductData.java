@@ -54,6 +54,8 @@ public class LoadProductData extends HttpServlet {
         Criteria c5 = s.createCriteria(Storage.class);
         List<Storage> storagelList = c5.list();
 
+        s.close();
+
         Gson gson = new Gson();
         JsonObject responseObject = new JsonObject();
         responseObject.addProperty("status", Boolean.TRUE);
