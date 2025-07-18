@@ -1,5 +1,7 @@
 package controller;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import hibernate.Brand;
 import hibernate.Color;
 import hibernate.HibernateUtil;
@@ -51,6 +53,19 @@ public class LoadProductData extends HttpServlet {
         //Search Storage
         Criteria c5 = s.createCriteria(Storage.class);
         List<Storage> storagelList = c5.list();
+
+        Gson gson = new Gson();
+        JsonObject responseObject = new JsonObject();
+        responseObject.addProperty("status", Boolean.TRUE);
+
+        responseObject.add("brandList", gson.toJsonTree(brandList));
+        responseObject.add("modelList", gson.toJsonTree(modelList));
+        responseObject.add("colorlList", gson.toJsonTree(colorlList));
+        responseObject.add("qualitylList", gson.toJsonTree(qualitylList));
+        responseObject.add("storagelList", gson.toJsonTree(storagelList));
+
+        response.setContentType("application/json");
+        response.getWriter().write(gson.toJson(responseObject));
 
     }
 
