@@ -21,6 +21,7 @@ window.onload = async function () {
         document.getElementById("message").innerHTML = "Unable to get product data! Please try again later.";
     }
     MyAccount();
+    GetCityData();
 }
 
 function loadSelect(selectId, list, property) {
@@ -105,5 +106,32 @@ async function MyAccount() {
 
     } else {
 
+    }
+}
+
+
+async function GetCityData() {
+    try {
+        const response = await fetch("CityData"); // assuming correct servlet mapping
+        if (response.ok) {
+            const json = await response.json(); // <-- FIXED this line
+
+            const citySelect = document.getElementById("citySelect");
+            let option = document.createElement("option");
+            json.forEach(city => {
+
+                let option = document.createElement("option");
+                option.innerHTML = city.name;
+                option.value - city.id;
+                citySelect.appendChild(option);
+            });
+
+
+
+        } else {
+            console.error("Server error:", response.status);
+        }
+    } catch (error) {
+        console.error("Fetch failed:", error);
     }
 }
