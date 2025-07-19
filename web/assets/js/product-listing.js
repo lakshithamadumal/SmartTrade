@@ -135,3 +135,55 @@ async function GetCityData() {
         console.error("Fetch failed:", error);
     }
 }
+
+
+async function SaveChanges() {
+
+    const firstName = document.getElementById("firstName").value;
+    const lastName = document.getElementById("lastName").value;
+    const lineOne = document.getElementById("lineOne").value;
+    const lineTwo = document.getElementById("lineTwo").value;
+    const postalCode = document.getElementById("postalCode").value;
+    const cityId = document.getElementById("citySelect").value;
+    const currentPassword = document.getElementById("currentPassword").value;
+    const newPassword = document.getElementById("newPassword").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+
+    const userDataObject = {
+        firstName: firstName,
+        lastName: lastName,
+        lineOne: lineOne,
+        lineTwo: lineTwo,
+        postalCode: postalCode,
+        cityId: cityId,
+        currentPassword: currentPassword,
+        newPassword: newPassword,
+        confirmPassword: confirmPassword
+    };
+
+
+    const response = await fetch("MyAccount", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(userDataObject)
+    });
+
+    if (response.ok) {
+        const json = await response.json();
+        if (json.status) {
+            if (json.message === "User Profile Updated!") {
+                window.location.reload();
+            } else {
+                document.getElementById("message").innerHTML = json.message;
+            }
+        } else {
+            document.getElementById("message").innerHTML = json.message;
+        }
+    } else {
+        document.getElementById("message").innerHTML = json.message;
+
+    }
+
+}

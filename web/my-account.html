@@ -482,19 +482,19 @@
                           <div class="col-lg-6">
                             <div class="form-group">
                               <label> Address Line 01 </label>
-                              <input type="text" id="line1" class="form-control" value />
+                              <input type="text" id="lineOne" class="form-control" value />
                             </div>
                           </div>
                           <div class="col-lg-6">
                             <div class="form-group">
                               <label> Address Line 02 </label>
-                              <input type="text" id="line2" class="form-control" value />
+                              <input type="text" id="lineTwo" class="form-control" value />
                             </div>
                           </div>
                           <div class="col-lg-6">
                             <div class="form-group">
                               <label> Postal Code </label>
-                              <input type="text" id="postalcode" class="form-control" value />
+                              <input type="text" id="postalCode" class="form-control" value />
                             </div>
                           </div>
                           <div class="col-lg-6">
@@ -509,7 +509,7 @@
                             <h5 class="title">Password Change</h5>
                             <div class="form-group">
                               <label> Current Password </label>
-                              <input type="password" id="currentPassword" class="form-control" value />
+                              <input type="password" id="currentPassword" disabled class="form-control" value />
                             </div>
                             <div class="form-group">
                               <label> New Password </label>
@@ -517,13 +517,13 @@
                             </div>
                             <div class="form-group">
                               <label> Confirm New Password </label>
-                              <input type="password" id="confirmNewPassword" class="form-control" />
+                              <input type="password" id="confirmPassword" class="form-control" />
                             </div>
                             <div class="form-group mb--0 d-grid">
-                              <input type="submit" class="axil-btn" value="Save Changes" />
+                              <input type="button" class="axil-btn" value="Save Changes" onclick="SaveChanges();" />
                             </div>
 
-                            <p class="text-danger" id="message">bfdbfb</p>
+                            <p class="text-danger" id="message"></p>
                           </div>
                         </div>
                       </form>
