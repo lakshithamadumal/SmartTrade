@@ -18,4 +18,11 @@ public class Util {
     public static boolean isPasswordValid(String password) {
         return password.matches("^.{1,7}$");
     }
+
+    public static boolean isInteger(String value) {
+        return value.matches("^?\\d+$");
+    }
+
+
+
 }

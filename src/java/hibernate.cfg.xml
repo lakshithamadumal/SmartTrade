@@ -17,5 +17,6 @@
         <mapping class="hibernate.Status"/>
         <mapping class="hibernate.City"/>
         <mapping class="hibernate.Address"/>
+        <mapping class="hibernate.Product"/>
     </session-factory>
 </hibernate-configuration>
