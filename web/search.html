@@ -25,13 +25,12 @@
         <link rel="stylesheet" href="assets/css/vendor/magnific-popup.css">
         <link rel="stylesheet" href="assets/css/vendor/base.css">
         <link rel="stylesheet" href="assets/css/style.min.css">
-
         <link rel="stylesheet" href="assets/css/notification.css">
 
     </head>
 
 
-    <body class="sticky-header" onload="viewAllProduct();">
+    <body class="sticky-header" onload="loadData();">
         <!--[if lte IE 9]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
     <![endif]-->
@@ -196,27 +195,28 @@
                                 <div class="toggle-list product-categories active">
                                     <h6 class="title">CATEGORY</h6>
                                     <div class="shop-submenu">
-                                        <ul>
+                                        <ul id="category-options">
                                             <!--<li class="current-cat"><a href="#">Apple</a></li>-->
-                                            <li><a>Apple</a></li>
+                                            <li id="category-li"><a id="category-a">Apple</a></li>
+
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="toggle-list product-categories product-gender active">
                                     <h6 class="title">CONDITION</h6>
                                     <div class="shop-submenu">
-                                        <ul>
+                                        <ul id="condition-options">
                                             <!--<li class="chosen"><a href="#">New</a></li>-->
-                                            <li><a>New</a></li>
+                                            <li id="condition-li"><a id="condition-a">Newdrrr</a></li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="toggle-list product-color active">
                                     <h6 class="title">COLOR</h6>
                                     <div class="shop-submenu">
-                                        <ul>
+                                        <ul id="color-options">
                                             <!--<li class="chosen" style="border-color: red;"><a style="background: red;" href="#" class="color-extra-02"></a></li>-->
-                                            <li style="border-color: red;"><a style="background: red;" class="color-extra-02"></a></li>
+                                            <li style="border-color: red;" id="color-li"><a style="background: red;" class="color-extra-02" id="color-a"></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -224,9 +224,9 @@
                                 <div class="toggle-list product-size active">
                                     <h6 class="title">STORAGE</h6>
                                     <div class="shop-submenu">
-                                        <ul>
+                                        <ul id="storage-options">
                                             <!--<li class="chosen"><a href="#">128 GB</a></li>-->
-                                            <li><a id="storage-a">128 GB</a></li>
+                                            <li id="storage-li"><a id="storage-a">128 GB</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -236,12 +236,12 @@
                                         <form action="#" class="mt--25">
                                             <div id="slider-range"></div>
                                             <div class="flex-center mt--20">
-                                                <input type="text" class="amount-range" readonly>
+                                                <input type="text" id="amount" class="amount-range" readonly>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
-                                <button class="axil-btn btn-bg-secondary">Apply</button>
+                                <button class="axil-btn btn-bg-secondary" onclick="searchProducts(0);">Apply</button>
                                 <button class="axil-btn btn-bg-primary mt--10">Reset All</button>
                             </div>
                             <!-- End .axil-shop-sidebar -->
@@ -253,7 +253,7 @@
                                         <div class="category-select align-items-center justify-content-lg-end justify-content-between">
                                             <!-- Start Single Select  -->
                                             <span class="filter-results">Showing 1-10 of 20 results</span>
-                                            <select class="single-select">
+                                            <select class="single-select" id="st-sort">
                                                 <option>Sort by Latest</option>
                                                 <option>Sort by Oldest</option>
                                                 <option>Sort by Name</option>
@@ -268,8 +268,8 @@
                                 </div>
                             </div>
                             <!-- End .row -->
+                            
                             <div class="row row--15" id="st-product-container">
-
                                 <div class="col-xl-4 col-sm-6" id="st-product">
                                     <div class="axil-product product-style-one mb--30">
                                         <div class="thumbnail">
@@ -289,18 +289,17 @@
                                             <div class="inner">
                                                 <h5 class="title"><a href="#" id="st-product-title-1">Apple iPhone 15 Pro</a></h5>
                                                 <div class="product-price-variant">
-                                                    <span class="price current-price" >Rs. <span id="st-product-price-1">350,000.00</span></span>
+                                                    <span class="price current-price">Rs. <span id="st-product-price-1"></span> </span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- End Single Product  -->
-
                             </div>
                             
                             <div class="text-center pt--20" id="st-pagination-container">
-                                <a href="#" class="axil-btn btn-bg-primary ml--10" id="st-pagination-button">Prev</a>
+                                <a  class="axil-btn btn-bg-primary me-2" id="st-pagination-button">Prev</a>
                             </div>
                             
                         </div>
@@ -582,29 +581,9 @@
 
         <!-- Main JS -->
         <script src="assets/js/main.js"></script>
+
         <script src="assets/js/search.js"></script>
-
-        <script>
-
-
-
-
-        const colorOptions = document.querySelectorAll('#color-options li');
-        colorOptions.forEach(option => {
-            option.addEventListener('click', function () {
-                colorOptions.forEach(opt => opt.classList.remove('chosen'));
-                this.classList.add('chosen');
-            });
-        });
-
-        const storageOptions = document.querySelectorAll('#storage-options li');
-        storageOptions.forEach(option => {
-            option.addEventListener('click', function () {
-                storageOptions.forEach(opt => opt.classList.remove('chosen'));
-                this.classList.add('chosen');
-            });
-        });
-        </script>
+        <script src="assets/js/notification.js"></script>
 
     </body>
 

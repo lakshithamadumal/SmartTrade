@@ -1,38 +1,32 @@
-async function SignUp() {
-    const firstName = document.getElementById("firstName").value;
-    const lastName = document.getElementById("lastName").value;
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+async function signUp() {
 
-    const user = {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        password: password
+    const user_dto = {
+        first_name: document.getElementById("first_name").value,
+        last_name: document.getElementById("last_name").value,
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value
     };
 
-    const userJson = JSON.stringify(user);
-
     const response = await fetch(
-        "SignUp",
-        {
-            method: "POST",
-            body: userJson,
-            headers: {
-                "Content-type": "application/json"
+            "SignUp",
+            {
+                method: "POST",
+                body: JSON.stringify(user_dto),
+                headers: {
+                    "Content-Type": "application/json"
+                }
             }
-        }
     );
 
-    if (response.ok) { //Success
+    if (response.ok) {
         const json = await response.json();
-        if (json.status) {
+
+        if (json.success) {
             window.location = "verify-account.html";
         } else {
-            document.getElementById("message").innerHTML = json.message;
+            document.getElementById("message").innerHTML = json.content;
         }
     } else {
-        document.getElementById("message").innerHTML = ("Sign Up Failed. Try again Later.");
-
+        document.getElementById("message").innerHTML = "Please try agin later";
     }
 }

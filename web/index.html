@@ -26,6 +26,8 @@
         <link rel="stylesheet" href="assets/css/vendor/base.css">
         <link rel="stylesheet" href="assets/css/style.min.css">
 
+        <link rel="stylesheet" href="assets/css/notification.css">
+
     </head>
 
 
@@ -64,8 +66,8 @@
                             <div class="header-top-link">
                                 <ul class="quick-link" id="st-quick-link">
                                     <li><a href="#">Help</a></li>
-                                    <li id="st-quick-link-li-1"><a href="#">Join Us</a></li>
-                                    <li id="st-quick-link-li-2"><a href="#">Sign In</a></li>
+                                    <li><a href="sign-up.html" id="st-quick-link-li-1">Join Us</a></li>
+                                    <li><a href="sign-in.html" id="st-quick-link-li-2">Sign In</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -120,7 +122,7 @@
                                             <li><a href="#">Menu-5-Item-1</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="#" onclick="viewCart();">View Cart</a></li>
+                                    <li><a onclick="viewCart();" href="#">View Cart</a></li>
                                 </ul>
                             </nav>
                             <!-- End Mainmanu Nav -->
@@ -161,9 +163,9 @@
                                             </li>
                                         </ul>
                                         <div class="login-btn">
-                                            <a id="st-button-1" href="#" class="axil-btn btn-bg-primary">Login</a>
+                                            <a id="st-button-1" href="sign-in.html" class="axil-btn btn-bg-primary">Login</a>
                                         </div>
-                                        <div id="st-div-1" class="reg-footer text-center">No account yet? <a href="#" class="btn-link">REGISTER HERE.</a></div>
+                                        <div id="st-div-1" class="reg-footer text-center">No account yet? <a href="sign-up.html" class="btn-link">REGISTER HERE.</a></div>
                                     </div>
                                 </li>
                                 <li class="axil-mobile-toggle">
@@ -179,14 +181,17 @@
             <!-- End Mainmenu Area -->
         </header>
 
-        <main class="main-wrapper">
+        <main class="main-wrapper" id="index-main">
             <div class="axil-main-slider-area main-slider-style-1">
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-5 col-sm-6">
                             <div class="main-slider-content">
+
+
                                 <div class="slider-content-activation-one">
-                                    
+
+
                                     <div class="single-slide slick-slide" data-sal="slide-up" data-sal-delay="400" data-sal-duration="800">
                                         <span class="subtitle"><i class="fas fa-fire"></i> Hot Deal In This Week</span>
                                         <h1 class="title" id="st-product-title-1">Product Title</h1>
@@ -197,7 +202,7 @@
 
                                         </div>
                                     </div>
-                                    
+
                                     <div class="single-slide slick-slide">
                                         <span class="subtitle"><i class="fas fa-fire"></i> Hot Deal In This Week</span>
                                         <h1 class="title" id="st-product-title-2">Product Title</h1>
@@ -208,7 +213,7 @@
 
                                         </div>
                                     </div>
-                                    
+
                                     <div class="single-slide slick-slide">
                                         <span class="subtitle"><i class="fas fa-fire"></i> Hot Deal In This Week</span>
                                         <h1 class="title" id="st-product-title-3">Product Title</h1>
@@ -221,36 +226,35 @@
                                     </div>
 
                                 </div>
+
+
                             </div>
                         </div>
                         <div class="col-lg-7 col-sm-6">
                             <div class="main-slider-large-thumb">
-                                
                                 <div class="slider-thumb-activation-one axil-slick-dots">
-                                    
                                     <div class="single-slide slick-slide" data-sal="slide-up" data-sal-delay="600" data-sal-duration="1500">
                                         <img id="st-product-image-1" src="assets/images/product/main-01.png" alt="Product">
                                         <div class="product-price">
                                             <span class="text">From Rs.</span>
-                                            <span class="price-amount" id="st-product-price-1" style="font-size: 14px;">0.00</span>
+                                            <span id="st-product-price-1" class="price-amount">0.00</span>
                                         </div>
                                     </div>
                                     <div class="single-slide slick-slide" data-sal="slide-up" data-sal-delay="600" data-sal-duration="1500">
                                         <img id="st-product-image-2" src="assets/images/product/main-02.png" alt="Product">
                                         <div class="product-price">
                                             <span class="text">From Rs.</span>
-                                            <span class="price-amount" id="st-product-price-2" style="font-size: 14px;">0.00</span>
+                                            <span id="st-product-price-2" class="price-amount">0.00</span>
                                         </div>
                                     </div>
                                     <div class="single-slide slick-slide">
                                         <img id="st-product-image-3" src="assets/images/product/main-03.png" alt="Product">
                                         <div class="product-price">
                                             <span class="text">From Rs.</span>
-                                            <span class="price-amount" id="st-product-price-3" style="font-size: 14px;">0.00</span>
+                                            <span id="st-product-price-3" class="price-amount">0.00</span>
                                         </div>
                                     </div>
                                 </div>
-                                
                             </div>
                         </div>
                     </div>
@@ -626,7 +630,7 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-12 text-center mt--20 mt_sm--0">
-                            <a href="search.html" class="axil-btn btn-bg-lighter btn-load-more">View All Products</a>
+                            <a href="#" class="axil-btn btn-bg-lighter btn-load-more">View All Products</a>
                         </div>
                     </div>
 
@@ -702,11 +706,13 @@
                                 <h5 class="widget-title">Support</h5>
 
                                 <div class="inner">
-                                    <p>
+                                    <p>No.3B 1/4, <br>
+                                        Sri Sambuddhathva Jayanthi Mawatha, Colombo 00500, <br>
+                                        Sri Lanka.
                                     </p>
                                     <ul class="support-list-item">
                                         <li><a href="mailto:support@smarttrade.lk"><i class="fal fa-envelope-open"></i> support@smarttrade.lk</a></li>
-                                        <li><a href="tel:"><i class="fal fa-phone-alt"></i> Phone Number</a></li>
+                                        <li><a href="tel:(+94)112 506 000"><i class="fal fa-phone-alt"></i> (+94) 112 506 000</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -782,7 +788,7 @@
                         <div class="col-xl-4 col-lg-12">
                             <div class="copyright-left d-flex flex-wrap justify-content-center">
                                 <ul class="quick-link">
-                                    <li>©2025. All rights reserved by <a target="_blank" href="#">SmartTrade</a>.</li>
+                                    <li>© 2024. All rights reserved by <a target="_blank" href="#">Java Institute</a>.</li>
                                 </ul>
                             </div>
                         </div>
@@ -908,9 +914,9 @@
 
         <!-- Main JS -->
         <script src="assets/js/main.js"></script>
-        
         <script src="assets/js/notification.js"></script>
-
+        <script src="assets/js/index.js"></script>
+        <script src="assets/js/cart.js"></script>
     </body>
 
 </html>

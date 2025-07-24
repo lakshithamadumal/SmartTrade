@@ -1,37 +1,29 @@
-async function VerifyAccount() {
+async function verifyAccount() {
 
-    const verificationCode = document.getElementById("verifyCode").value;
-
-    const verification = {
-        verificationCode: verificationCode
+    const dto = {
+        verification: document.getElementById("verification").value
     };
 
-    const verificationJson = JSON.stringify(verification);
-
     const response = await fetch(
-        "VerifyAccount",
-        {
-            method: "POST",
-            body: verificationJson,
-            headers: {
-                "Content-type": "application/json"
+            "Verification",
+            {
+                method: "POST",
+                body: JSON.stringify(dto),
+                headers: {
+                    "Content-Type": "application/json"
+                }
             }
-        }
     );
 
     if (response.ok) {
         const json = await response.json();
-        if (json.status) {
+
+        if (json.success) {
             window.location = "index.html";
         } else {
-            if (json.message === "Email not Found") {
-                window.location = "sign-in.html";
-            } else {
-                document.getElementById("message").innerHTML = json.message;
-            }
+            document.getElementById("message").innerHTML = json.content;
         }
-
     } else {
-        document.getElementById("message").innerHTML = "Sign Up Failed. Try again Later.";
+        document.getElementById("message").innerHTML = "Please try agin later";
     }
 }

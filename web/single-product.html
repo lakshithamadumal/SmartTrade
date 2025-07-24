@@ -26,12 +26,12 @@
     <link rel="stylesheet" href="assets/css/vendor/base.css">
     <link rel="stylesheet" href="assets/css/style.min.css">
     
-    <link rel="stylesheet" href="assets/css/notification.css">
+    <link rel="stylesheet" href="assets/css/notification.css"/>
 
 </head>
 
 
-<body class="sticky-header" onload="loadData();">
+<body class="sticky-header" onload="loadProduct();">
     <!--[if lte IE 9]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
 <![endif]-->
@@ -194,33 +194,39 @@
                                     <div class="single-product-thumbnail-wrap zoom-gallery">
                                         <div class="single-product-thumbnail product-large-thumbnail-3 axil-product">
                                             <div class="thumbnail">
-                                                <a href="#" >
+                                                <a id="thumbnail1" href="assets/images/product/main-01.png" class="popup-zoom">
                                                     <img id="image1" src="assets/images/product/product-01.png" alt="Product Images">
                                                 </a>
                                             </div>
                                             <div class="thumbnail">
-                                                <a href="#" >
+                                                <a id="thumbnail2" href="assets/images/product/main-01.png" class="popup-zoom">
                                                     <img id="image2" src="assets/images/product/product-01.png" alt="Product Images">
                                                 </a>
                                             </div>
                                             <div class="thumbnail">
-                                                <a href="#" >
+                                                <a id="thumbnail3" href="assets/images/product/main-01.png" class="popup-zoom">
                                                     <img id="image3" src="assets/images/product/product-01.png" alt="Product Images">
                                                 </a>
                                             </div>
+                                        </div>
+                                        
+                                        <div class="product-quick-view position-view">
+                                            <a href="assets/images/product/product-01.png" class="popup-zoom">
+                                                <i class="far fa-search-plus"></i>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-2 order-lg-1">
                                     <div class="product-small-thumb-3 small-thumb-wrapper">
                                         <div class="small-thumb-img">
-                                            <img id="thumb-image1" src="assets/images/product/product-01.png" alt="thumb image">
+                                            <img id="leftimage1" src="assets/images/product/product-01.png" alt="thumb image">
                                         </div>
                                         <div class="small-thumb-img">
-                                            <img id="thumb-image2" src="assets/images/product/product-01.png" alt="thumb image">
+                                            <img id="leftimage2" src="assets/images/product/product-01.png" alt="thumb image">
                                         </div>
                                         <div class="small-thumb-img">
-                                            <img id="thumb-image3" src="assets/images/product/product-01.png" alt="thumb image">
+                                            <img id="leftimage3" src="assets/images/product/product-01.png" alt="thumb image">
                                         </div>
                                     </div>
                                 </div>
@@ -229,17 +235,17 @@
                         <div class="col-lg-5 mb--40">
                             <div class="single-product-content">
                                 <div class="inner">
-                                    <h2 class="product-title" id="product-title">Apple iPhone 15 Pro 256GB Brand New</h2>
+                                    <h2 class="product-title" id="title">Apple iPhone 15 Pro 256GB Brand New</h2>
                                     
-                                    <p class="mb--10">Published On <span id="published-on">September 2, 2024</span></p>
+                                    <p class="mb--10">Published On<span id="product-published-on"></span></p>
                                     
-                                    <span class="price-amount">Rs. <span id="product-price">350,000.00</span></span>
+                                    <span class="price-amount">Rs. <span id="product-price"></span></span>
                                     
                                     <ul class="product-meta">
-                                        <li><i class="fal fa-check"></i>Brand:&nbsp;<span id="brand-name">Brand Name Here</span></li>
-                                        <li><i class="fal fa-check"></i>Model:&nbsp;<span id="model-name">Model Name Here</span></li>
-                                        <li><i class="fal fa-check"></i><span id="product-quality">Product Condition Here</span></li>
-                                        <li><i class="fal fa-check"></i>In stock&nbsp;<span id="product-stock">5</span>&nbsp;Units</li>
+                                        <li><i class="fal fa-check"></i>Brand: &nbsp; <span id="product-category"></span></li>
+                                        <li><i class="fal fa-check"></i>Model: &nbsp; <span id="product-model"></span></li>
+                                        <li><i class="fal fa-check"></i> <span id="product-condition"></span></li>
+                                        <li><i class="fal fa-check"></i>In Stock &nbsp; <span id="product-stock"></span> &nbsp; Units</li>
                                     </ul>
 
                                     <div class="product-variations-wrapper">
@@ -262,7 +268,7 @@
                                         <div class="product-variation product-size-variation">
                                             <h6 class="title">Storage:</h6>
                                             <ul class="range-variant">
-                                                <li id="product-storage">128 GB</li>
+                                                <li id="product-storage"></li>
                                             </ul>
                                         </div>
                                         <!-- End Product Variation  -->
@@ -303,12 +309,7 @@
                                         <div class="single-desc">
                                             <h5 class="title">Description:</h5>
                                             <p id="product-description">
-                                                The iPhone 15 Pro features the first major redesign of the outer shell of the device since the iPhone 12 Pro in 2020,
-                                                featuring rounded edges, a slightly curved display, and back glass.
-                                                The enclosure of the iPhone 15 Pro and iPhone 15 Pro Max is made of grade 5 titanium,
-                                                unlike the stainless steel frame of previous Pro models. The display bezels have also been reduced from 2.2 mm
-                                                to 1.55 mm. The phone is available in four colors: natural titanium, blue titanium, white titanium,
-                                                and black titanium. It is also the first premium iPhone since the iPhone X to not come in the gold color option.
+                                                
                                             </p>
                                         </div>
                                     </div>
@@ -336,14 +337,13 @@
                     <span class="title-highlighter highlighter-primary"><i class="far fa-shopping-basket"></i> You May Like</span>
                     <h2 class="title">Similar Products</h2>
                 </div>
-                
-                <div class="recent-product-activation slick-layout-wrapper--15 axil-slick-arrow arrow-top-slide" id="smiler-product-main">
-                    
+                <div class="recent-product-activation slick-layout-wrapper--15 axil-slick-arrow arrow-top-slide" id="similar-product-main">
+                   
                     <div class="slick-single-layout" id="similar-product">
                         <div class="axil-product">
                             <div class="thumbnail">
-                                <a href="#" id="similar-product-a1">
-                                    <img id="similar-product-image" src="assets/images/product/product-01.png" alt="Product Images">
+                                <a href="single-product.html" id="similar-product-a1">
+                                    <img src="assets/images/product/product-01.png" alt="Product Images" id="similar-product-image">
                                 </a>
                                 
                                 <div class="product-hover-action">
@@ -364,8 +364,7 @@
                                     <div class="color-variant-wrapper">
                                         <ul class="color-variant">
                                             <li class="color-extra-01 active">
-                                                <!-- color-border and color-background -->
-                                                <span id="similar-product-color-border"><span class="color" id="similar-product-color-background"></span></span> 
+                                                <span id="similar-product-color-border"><span class="color" id="similar-product-color"></span></span>
                                             </li>
                                         </ul>
                                     </div>
@@ -374,141 +373,7 @@
                         </div>
                     </div>
                     
-                    <div class="slick-single-layout">
-                        <div class="axil-product">
-                            <div class="thumbnail">
-                                <a>
-                                    <img src="assets/images/product/product-01.png" alt="Product Images">
-                                </a>
-                                
-                                <div class="product-hover-action">
-                                    <ul class="cart-action">
-                                        <li class="wishlist"><a href="#"><i class="far fa-heart"></i></a></li>
-                                        <li class="select-option"><a href="#">Add to Cart</a></li>
-                                        <li class="quickview"><a href="#"><i class="far fa-eye"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product-content">
-                                <div class="inner">
-                                    <h5 class="title"><a href="#">Apple iPhone 15 Pro 128 GB</a></h5>
-                                    <p class="b2 mb--10">256 GB</p>
-                                    <div class="product-price-variant">
-                                        <span class="price current-price">Rs. 200,000.00</span>
-                                    </div>
-                                    <div class="color-variant-wrapper">
-                                        <ul class="color-variant">
-                                            <li class="color-extra-01 active">
-                                                <span style="border-color: red;"><span class="color" style="background: red;"></span></span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     
-                    <div class="slick-single-layout">
-                        <div class="axil-product">
-                            <div class="thumbnail">
-                                <a href="single-product.html">
-                                    <img src="assets/images/product/product-01.png" alt="Product Images">
-                                </a>
-                                
-                                <div class="product-hover-action">
-                                    <ul class="cart-action">
-                                        <li class="wishlist"><a href="#"><i class="far fa-heart"></i></a></li>
-                                        <li class="select-option"><a href="#">Add to Cart</a></li>
-                                        <li class="quickview"><a href="#"><i class="far fa-eye"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product-content">
-                                <div class="inner">
-                                    <h5 class="title"><a href="#">Apple iPhone 15 Pro 128 GB</a></h5>
-                                    <p class="b2 mb--10">256 GB</p>
-                                    <div class="product-price-variant">
-                                        <span class="price current-price">Rs. 200,000.00</span>
-                                    </div>
-                                    <div class="color-variant-wrapper">
-                                        <ul class="color-variant">
-                                            <li class="color-extra-01 active">
-                                                <span style="border-color: red;"><span class="color" style="background: red;"></span></span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="slick-single-layout">
-                        <div class="axil-product">
-                            <div class="thumbnail">
-                                <a href="single-product.html">
-                                    <img src="assets/images/product/product-01.png" alt="Product Images">
-                                </a>
-                                
-                                <div class="product-hover-action">
-                                    <ul class="cart-action">
-                                        <li class="wishlist"><a href="#"><i class="far fa-heart"></i></a></li>
-                                        <li class="select-option"><a href="#">Add to Cart</a></li>
-                                        <li class="quickview"><a href="#"><i class="far fa-eye"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product-content">
-                                <div class="inner">
-                                    <h5 class="title"><a href="#">Apple iPhone 15 Pro 128 GB</a></h5>
-                                    <p class="b2 mb--10">256 GB</p>
-                                    <div class="product-price-variant">
-                                        <span class="price current-price">Rs. 200,000.00</span>
-                                    </div>
-                                    <div class="color-variant-wrapper">
-                                        <ul class="color-variant">
-                                            <li class="color-extra-01 active">
-                                                <span style="border-color: red;"><span class="color" style="background: red;"></span></span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="slick-single-layout">
-                        <div class="axil-product">
-                            <div class="thumbnail">
-                                <a href="single-product.html">
-                                    <img src="assets/images/product/product-01.png" alt="Product Images">
-                                </a>
-                                
-                                <div class="product-hover-action">
-                                    <ul class="cart-action">
-                                        <li class="wishlist"><a href="#"><i class="far fa-heart"></i></a></li>
-                                        <li class="select-option"><a href="#">Add to Cart</a></li>
-                                        <li class="quickview"><a href="#"><i class="far fa-eye"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product-content">
-                                <div class="inner">
-                                    <h5 class="title"><a href="#">Apple iPhone 15 Pro 128 GB</a></h5>
-                                    <p class="b2 mb--10">256 GB</p>
-                                    <div class="product-price-variant">
-                                        <span class="price current-price">Rs. 200,000.00</span>
-                                    </div>
-                                    <div class="color-variant-wrapper">
-                                        <ul class="color-variant">
-                                            <li class="color-extra-01 active">
-                                                <span style="border-color: red;"><span class="color" style="background: red;"></span></span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     
                     <!-- End .slick-single-layout -->
                 </div>
@@ -682,14 +547,14 @@
         </footer>
     <!-- End Footer Area  -->
 
-    <!-- Header Search Modal Start -->
+    <!-- Header Search Modal End -->
     <div class="header-search-modal" id="header-search-modal">
             <button class="card-close sidebar-close"><i class="fas fa-times"></i></button>
             <div class="header-search-wrap">
                 <div class="card-header">
                     <form action="#">
                         <div class="input-group">
-                            <input type="search" class="form-control" name="prod-search" placeholder="Search">
+                            <input type="search" class="form-control" name="prod-search" id="prod-search" placeholder="Search">
                             <button type="submit" class="axil-btn btn-bg-primary"><i class="far fa-search"></i></button>
                         </div>
                     </form>
@@ -786,9 +651,9 @@
 
     <!-- Main JS -->
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/single-product.js"></script>
-    
 
+    <script src="assets/js/single-product.js"></script>
+    <script src="assets/js/notification.js"></script>
 </body>
 
 </html>

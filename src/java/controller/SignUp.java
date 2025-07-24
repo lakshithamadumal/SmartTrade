@@ -1,136 +1,97 @@
 package controller;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import hibernate.HibernateUtil;
-import hibernate.User;
+import com.google.gson.GsonBuilder;
+import dto.Response_DTO;
+import dto.User_DTO;
+import entity.User;
 import java.io.IOException;
-import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import jdk.javadoc.internal.tool.Main;
+import model.HibernateUtil;
 import model.Mail;
-import model.Util;
+import model.Validations;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 
-/**
- *
- * @author Laky
- */
 @WebServlet(name = "SignUp", urlPatterns = {"/SignUp"})
 public class SignUp extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest requset, HttpServletResponse response) throws ServletException, IOException {
 
-        Gson gson = new Gson();
-        JsonObject user = gson.fromJson(request.getReader(), JsonObject.class);
+        Response_DTO response_DTO = new Response_DTO();
 
-        String firstName = user.get("firstName").getAsString();
-        String lastName = user.get("lastName").getAsString();
-        String email = user.get("email").getAsString();
-        String password = user.get("password").getAsString();
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        final User_DTO user_DTO = gson.fromJson(requset.getReader(), User_DTO.class);
 
-        //Validation
-        JsonObject responseObject = new JsonObject();
-        responseObject.addProperty("status", Boolean.FALSE);
+        if (user_DTO.getFirst_name().isEmpty()) {
+            response_DTO.setContent("Please enter your First Name");
 
-        if (firstName.isEmpty()) {
-            responseObject.addProperty("message", "First Name can not be Empty!");
-        } else if (lastName.isEmpty()) {
-            responseObject.addProperty("message", "Last Name can not be Empty!");
-        } else if (email.isEmpty()) {
-            responseObject.addProperty("message", "Email can not be Empty!");
-        } else if (!Util.isEmailValid(email)) {
-            responseObject.addProperty("message", "Please Enter a Valid Email!");
-        } else if (password.isEmpty()) {
-            responseObject.addProperty("message", "Password can not be Empty!");
-        } else if (!Util.isPasswordValid(password)) {
-            responseObject.addProperty("message", "Password must contain at least 8 characters, including uppercase, lowercase, a number, and a special character.");
+        } else if (user_DTO.getLast_name().isEmpty()) {
+            response_DTO.setContent("Please enter your Last Name");
+
+        } else if (user_DTO.getEmail().isEmpty()) {
+            response_DTO.setContent("Please enter your Email");
+
+        } else if (!Validations.isEmailValid(user_DTO.getEmail())) {
+            response_DTO.setContent("Please enter a valid Email");
+
+        } else if (user_DTO.getPassword().isEmpty()) {
+            response_DTO.setContent("Please create a Password");
+
+        } else if (!Validations.isPasswordValid(user_DTO.getPassword())) {
+            response_DTO.setContent("Password must include at least one uppercase letter, "
+                    + "number, special character, and not less than 8 characters");
+
         } else {
 
-            //Data Save
-            SessionFactory sf = HibernateUtil.getSessionFactory();
-            Session s = sf.openSession();
+            Session session = HibernateUtil.getSessionFactory().openSession();
 
-            Criteria criteria = s.createCriteria(User.class);
-            criteria.add(Restrictions.eq("email", email));
+            Criteria criteria = session.createCriteria(User.class);
+            criteria.add(Restrictions.eq("email", user_DTO.getEmail()));
 
             if (!criteria.list().isEmpty()) {
-                responseObject.addProperty("message", "User with this email already exit!");
+                response_DTO.setContent("Email already exists");
             } else {
 
-                User u = new User();
-                u.setFirst_name(firstName);
-                u.setLast_name(lastName);
-                u.setEmail(email);
-                u.setPassword(password);
+                int code = (int) (Math.random() * 100000);
 
-                u.setCreated_at(new Date());
+                final User user = new User();
+                user.setEmail(user_DTO.getEmail());
+                user.setFirst_name(user_DTO.getFirst_name());
+                user.setLast_name(user_DTO.getLast_name());
+                user.setPassword(user_DTO.getPassword());
+                user.setVerification(String.valueOf(code));
 
-                //Verification
-                String verificationCode = Util.generateCode();
-                u.setVerification(verificationCode);
-
-                s.save(u);
-                s.beginTransaction().commit();
-
-                //send email
-                new Thread(new Runnable() {
+                Thread sendMailThread = new Thread() {
                     @Override
                     public void run() {
-                        String emailBody = "<div style='"
-                                + "font-family: Arial, sans-serif; "
-                                + "background-color: #f4f4f4; "
-                                + "padding: 30px; "
-                                + "text-align: center;'>"
-                                + "<div style='"
-                                + "background-color: #ffffff; "
-                                + "max-width: 600px; "
-                                + "margin: auto; "
-                                + "padding: 40px; "
-                                + "border-radius: 8px; "
-                                + "box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);'>"
-                                + "<h2 style='color: #333;'>SmartTrade Verification</h2>"
-                                + "<p style='font-size: 16px; color: #555;'>Use the code below to verify your email address:</p>"
-                                + "<div style='"
-                                + "font-size: 28px; "
-                                + "font-weight: bold; "
-                                + "color: #007bff; "
-                                + "margin-top: 20px;'>"
-                                + verificationCode + "</div>"
-                                + "<p style='margin-top: 30px; font-size: 14px; color: #888;'>"
-                                + "If you didn’t request this, please ignore this email."
-                                + "</p>"
-                                + "</div>"
-                                + "</div>";
-
-                        Mail.sendMail(email, "SmartTrade Verification Code", emailBody);
+                        Mail.sendMail(
+                                user_DTO.getEmail(),
+                                "Smart Trade Email Verification",
+                                "<h1>Verification Code : " + user.getVerification() + "</h1>"
+                        );
                     }
-                }).start();
 
-                //Session Managemnrt
-                HttpSession ses = request.getSession();
-                ses.setAttribute("email", email);
-                //Session Managemnrt
+                };
+                sendMailThread.start();
+                session.save(user);
+                session.beginTransaction().commit();
 
-                responseObject.addProperty("status", Boolean.TRUE);
-                responseObject.addProperty("message", "Registration successful. Please check your email for Verification");
+                requset.getSession().setAttribute("email", user_DTO.getEmail());
+                response_DTO.setSuccess(true);
+                response_DTO.setContent("Registration Complete. Please check your inbox for Verification Code!");
+
             }
-            s.close();
+            session.close();
         }
-
-        String responseText = gson.toJson(responseObject);
         response.setContentType("application/json");
-        response.getWriter().write(responseText);
-
+        response.getWriter().write(gson.toJson(response_DTO));
     }
+
 }

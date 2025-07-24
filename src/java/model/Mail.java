@@ -9,15 +9,10 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-/**
- *
- * @author tharaka@javainstitute.edu.lk
- */
-
 public class Mail {
 
-    private static final String APP_EMAIL = "mandujayaweera2003@gmail.com";
-    private static final String APP_PASSWORD = "nuxj ixkg mkcm ezby";
+    private static final String APP_EMAIL = "rimasmumthasofficial@gmail.com";
+    private static final String APP_PASSWORD = "uzepeeklrgkuxudcg";
 
     public static void sendMail(String email, String subject, String htmlContent) {
 
@@ -39,10 +34,10 @@ public class Mail {
             message.setFrom(new InternetAddress(Mail.APP_EMAIL));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
             message.setSubject(subject);
-            message.setContent(htmlContent,"text/html");
+            //message.setText(content);
+            message.setContent(htmlContent, "text/html");
 
             Transport.send(message);
-
             System.out.println("Email sent successfully!");
 
         } catch (MessagingException e) {

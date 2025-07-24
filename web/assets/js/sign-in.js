@@ -1,39 +1,37 @@
-async function SignIn() {
+async function signIn() {
 
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-
-    const SignIn = {
-        email: email,
-        password: password
+    const user_dto = {
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value
     };
 
-    const SignInJson = JSON.stringify(SignIn);
-
     const response = await fetch(
-        "SignIp",
-        {
-            method: "POST",
-            body: SignInJson,
-            headers: {
-                "Content-type": "application/json"
+            "SignIn",
+            {
+                method: "POST",
+                body: JSON.stringify(user_dto),
+                headers: {
+                    "Content-Type": "application/json"
+                }
             }
-        }
     );
 
-    if (response.ok) { //Success
+    if (response.ok) {
         const json = await response.json();
-        if (json.status) {
-            if (json.message === "1") {
-                window.location = "verify-account.html";
-            } else {
-                window.location = "index.html";
-            }
+
+        if (json.success) {
+            window.location = "index.html";
+
         } else {
-            document.getElementById("message").innerHTML = json.message;
+
+            if (json.content === "Unverified") {
+                window.location = "verify-account.html";
+
+            } else {
+                document.getElementById("message").innerHTML = json.content;
+            }
         }
     } else {
-        document.getElementById("message").innerHTML = ("Sign In Failed. Try again Later.");
-
+        document.getElementById("message").innerHTML = "Please try agin later";
     }
 }
